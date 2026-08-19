@@ -1,4 +1,4 @@
-const REGISTRATION_ENDPOINT='https://script.google.com/macros/s/AKfycbxZwABTUcjYMVFQs4XlSsPLbnd_Q6FS0LLEk7_EYjkCkt79u40Zte52MboE4tsLQBsZ/exec';
+const REGISTRATION_ENDPOINT='https://script.google.com/macros/s/AKfycbxCcWNU65faD-9R8Is34eWFNUn3hNXCgm_582f_KfmE2uXr3sDIa3q4BU78rGvGP3oj/exec';
 const form=document.getElementById('registrationForm'),fileInput=document.getElementById('paymentProof'),dropzone=document.getElementById('dropzone'),fileName=document.getElementById('fileName'),message=document.getElementById('formMessage');
 function showFile(){const f=fileInput.files[0];fileName.textContent=f?`Selected: ${f.name}`:''}fileInput.addEventListener('change',showFile);
 ['dragenter','dragover'].forEach(e=>dropzone.addEventListener(e,x=>{x.preventDefault()}));['dragleave','drop'].forEach(e=>dropzone.addEventListener(e,x=>{x.preventDefault()}));
