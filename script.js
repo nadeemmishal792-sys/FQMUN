@@ -1,4 +1,4 @@
-const REGISTRATION_ENDPOINT='https://script.google.com/macros/s/AKfycbzrt4yvZ3u8IqggVWE0jUBYamqKEbcMacIExVf0_8zNkEFXGNx8o_-Zkqo-DNQWfUpo/exec';
+const REGISTRATION_ENDPOINT='https://script.google.com/macros/s/AKfycbxjdsnuTvaO2iJ_biXnqcZ2skd8BLzryigl0pHO5Xw_1sFxUXCQGjfp-KvktYtUiw/exec';
 const form=document.getElementById('registrationForm'),fileInput=document.getElementById('paymentProof'),dropzone=document.getElementById('dropzone'),fileName=document.getElementById('fileName'),message=document.getElementById('formMessage'),committeeSelect=document.getElementById('committeeSelect'),personalityField=document.getElementById('personalityField'),personalityPreference=document.getElementById('personalityPreference');
 function showFile(){const f=fileInput.files[0];fileName.textContent=f?`Selected: ${f.name}`:''}fileInput.addEventListener('change',showFile);
 committeeSelect.addEventListener('change',()=>{const isPNA=committeeSelect.value==='PNA — Pakistan National Assembly';personalityField.style.display=isPNA?'block':'none';personalityPreference.required=isPNA;if(!isPNA)personalityPreference.value=''});
