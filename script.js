@@ -1,0 +1,7 @@
+const form=document.getElementById('registrationForm');const fileInput=document.getElementById('paymentProof');const dropzone=document.getElementById('dropzone');const fileName=document.getElementById('fileName');const message=document.getElementById('formMessage');
+function showFile(){const f=fileInput.files[0];fileName.textContent=f?`Selected: ${f.name}`:''}
+fileInput.addEventListener('change',showFile);
+['dragenter','dragover'].forEach(e=>dropzone.addEventListener(e,x=>{x.preventDefault();dropzone.classList.add('active')}));
+['dragleave','drop'].forEach(e=>dropzone.addEventListener(e,x=>{x.preventDefault();dropzone.classList.remove('active')}));
+dropzone.addEventListener('drop',e=>{const files=e.dataTransfer.files;if(files.length){fileInput.files=files;showFile()}});
+form.addEventListener('submit',e=>{e.preventDefault();message.className='form-message';message.textContent='';if(!form.checkValidity()){form.reportValidity();message.classList.add('error');message.textContent='Please complete all required fields and upload your payment screenshot.';return}const file=fileInput.files[0];if(file&&file.size>5*1024*1024){message.classList.add('error');message.textContent='Please upload a payment screenshot smaller than 5 MB.';return}message.classList.add('success');message.textContent='Registration received on this device. Please keep your payment screenshot and await confirmation from the FQMUN team.';form.reset();fileName.textContent='';});
