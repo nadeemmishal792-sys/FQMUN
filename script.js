@@ -1,4 +1,4 @@
-const REGISTRATION_ENDPOINT = 'https://script.google.com/macros/s/AKfycbyf5pTjZbGK-56lapceNs9pNioR4tMFJMj0CqCzMjDtpx4wJK1_jwkQrukUmppnDY5k/exec';
+const REGISTRATION_ENDPOINT = 'https://script.google.com/macros/s/AKfycbwnUSLioKlBZrLepPmkrQh9Qgnwb1LfzgyQGNR-MutuyUgeo8jn8plXd_3B81sgRULN/exec';
 
 const form = document.getElementById('registrationForm');
 const fileInput = document.getElementById('paymentProof');
@@ -8,14 +8,6 @@ const message = document.getElementById('formMessage');
 const committeeSelect = document.getElementById('committeeSelect');
 const personalityField = document.getElementById('personalityField');
 const personalityPreference = document.getElementById('personalityPreference');
-
-/* =====================================================
-   NEW REGISTRATION TYPE UI
-   Keeps the existing FQMUN form and adds:
-   - Individual Delegate
-   - Delegation (exactly 5 delegates)
-   - Observer
-===================================================== */
 
 const typeAnchor = committeeSelect?.parentElement;
 
@@ -199,10 +191,6 @@ form.addEventListener('submit', async e => {
 });
 
 updateRegistrationUI();
-
-/* =====================================================
-   EXISTING FQMUN COUNTDOWN
-===================================================== */
 
 const countdown = document.getElementById('countdown');
 function updateCountdown() {
