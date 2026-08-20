@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="FQMUN — Online Model United Nations, 26–28 August." />
+  <meta name="description" content="FQMUN 2026 — Online Model United Nations, 26–28 August." />
+  <meta name="theme-color" content="#070304" />
   <title>FQMUN 2026 | Online Model United Nations</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,15 +12,106 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header class="nav"><a class="brand" href="#top"><span>FQ</span>MUN</a><nav><a href="#about">About</a><a href="#committees">Committees</a><a href="#payment">Payment</a><a class="nav-cta" href="#register">Register</a></nav></header>
+  <header class="nav">
+    <a class="brand" href="#top"><span>FQ</span>MUN</a>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#committees">Committees</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#faq">FAQ</a>
+      <a class="nav-cta" href="#register">Register</a>
+    </nav>
+  </header>
+
   <main id="top">
-    <section class="hero"><div class="hero-glow"></div><div class="hero-content"><p class="eyebrow">ONLINE MODEL UNITED NATIONS · 2026</p><h1>Diplomacy.<br><em>Debate.</em> Impact.</h1><p class="hero-copy">Three days. Three powerful committees. One virtual diplomatic floor where your voice can shape the room.</p><div class="hero-actions"><a class="button primary" href="#register">Register for FQMUN <span>↗</span></a><a class="button ghost" href="#committees">Explore committees</a></div><div class="date-strip"><div><strong>26</strong><small>AUG</small></div><i></i><div><strong>27</strong><small>AUG</small></div><i></i><div><strong>28</strong><small>AUG</small></div><span>ONLINE · PKR 500</span></div></div><div class="hero-card"><div class="seal">FQ</div><p>FQMUN</p><span>2026</span><div class="card-lines"><b></b><b></b><b></b></div><small>THE FLOOR IS YOURS</small></div></section>
-    <section id="about" class="section about"><div class="section-label">01 / THE CONFERENCE</div><div><h2>Where ideas become <em>action.</em></h2><p>FQMUN is an online Model United Nations conference built for delegates who want more than a certificate. Step into the shoes of a diplomat, research deeply, negotiate intelligently and defend your country's position with confidence.</p><div class="facts"><div><strong>03</strong><span>Days</span></div><div><strong>03</strong><span>Committees</span></div><div><strong>500</strong><span>PKR Fee</span></div></div></div></section>
-    <section id="committees" class="section committees"><div class="section-label">02 / COMMITTEES</div><div class="committee-grid"><article class="committee"><span class="num">01</span><div><h3>PNA</h3><p>Pakistan National Assembly</p><small>Domestic policy · Parliamentary debate</small></div><span class="arrow">↗</span></article><article class="committee featured"><span class="num">02</span><div><h3>UNSC</h3><p>United Nations Security Council</p><small>Peace · Security · Crisis diplomacy</small></div><span class="arrow">↗</span></article><article class="committee"><span class="num">03</span><div><h3>UNHRC</h3><p>United Nations Human Rights Council</p><small>Rights · Equality · Social justice</small></div><span class="arrow">↗</span></article></div></section>
-    <section id="payment" class="section payment"><div class="section-label">03 / PAYMENT</div><div class="payment-box"><div><p class="eyebrow">REGISTRATION FEE</p><h2>PKR <strong>500</strong></h2><p>Send the registration fee through Easypaisa, then upload your payment screenshot in the registration form.</p></div><div class="account-card"><span>EASYPAISA</span><strong>NADEEM AHMED</strong><b>03434296090</b><small>Account / Mobile Number</small></div></div></section>
-    <section id="register" class="section register"><div class="section-label">04 / REGISTER</div><div class="register-head"><h2>Claim your <em>seat.</em></h2><p>Complete the form and attach a clear screenshot of your PKR 500 payment.</p></div>
+    <section class="hero">
+      <div class="hero-glow"></div>
+      <div class="hero-content">
+        <p class="eyebrow">ONLINE MODEL UNITED NATIONS · 2026</p>
+        <h1>Diplomacy.<br><em>Debate.</em> Impact.</h1>
+        <p class="hero-copy">Three days. Three powerful committees. One virtual diplomatic floor where your voice can shape the room.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#register">Register for FQMUN <span>↗</span></a>
+          <a class="button ghost" href="#committees">Explore committees</a>
+        </div>
+        <div class="date-strip">
+          <div><strong>26</strong><small>AUG</small></div><i></i>
+          <div><strong>27</strong><small>AUG</small></div><i></i>
+          <div><strong>28</strong><small>AUG</small></div>
+          <span>ONLINE · PKR 500</span>
+        </div>
+        <div class="countdown" aria-live="polite">
+          <span class="countdown-label">CONFERENCE COUNTDOWN</span>
+          <div class="countdown-grid">
+            <div><strong id="days">--</strong><small>DAYS</small></div>
+            <div><strong id="hours">--</strong><small>HOURS</small></div>
+            <div><strong id="minutes">--</strong><small>MIN</small></div>
+            <div><strong id="seconds">--</strong><small>SEC</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="seal">FQ</div><p>FQMUN</p><span>2026</span>
+        <div class="card-lines"><b></b><b></b><b></b></div>
+        <small>THE FLOOR IS YOURS</small>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div class="section-label">01 / THE CONFERENCE</div>
+      <div>
+        <h2>Where ideas become <em>action.</em></h2>
+        <p>FQMUN is an online Model United Nations conference built for delegates who want more than a certificate. Step into the shoes of a diplomat, research deeply, negotiate intelligently and defend your country's position with confidence.</p>
+        <div class="facts">
+          <div><strong>03</strong><span>Days</span></div>
+          <div><strong>03</strong><span>Committees</span></div>
+          <div><strong>500</strong><span>PKR Fee</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="committees" class="section committees">
+      <div class="section-label">02 / COMMITTEES</div>
+      <div class="committee-grid">
+        <article class="committee"><span class="num">01</span><div><h3>PNA</h3><p>Pakistan National Assembly</p><small>Domestic policy · Parliamentary debate</small></div><span class="arrow">↗</span></article>
+        <article class="committee featured"><span class="num">02</span><div><h3>UNSC</h3><p>United Nations Security Council</p><small>Peace · Security · Crisis diplomacy</small></div><span class="arrow">↗</span></article>
+        <article class="committee"><span class="num">03</span><div><h3>UNHRC</h3><p>United Nations Human Rights Council</p><small>Rights · Equality · Social justice</small></div><span class="arrow">↗</span></article>
+      </div>
+    </section>
+
+    <section id="schedule" class="section schedule-section">
+      <div class="section-label">03 / CONFERENCE PLAN</div>
+      <div class="section-intro"><div><h2>Three days. <em>One floor.</em></h2><p>Use this as the public roadmap for the virtual conference. Exact session timings and meeting links can be announced later.</p></div></div>
+      <div class="timeline">
+        <article class="timeline-item"><span>26 AUG</span><div><strong>DAY 01 · OPENING</strong><p>Opening ceremony · Rules of Procedure · Committee introductions · First formal sessions</p></div></article>
+        <article class="timeline-item"><span>27 AUG</span><div><strong>DAY 02 · DEBATE</strong><p>Moderated caucuses · Unmoderated negotiation · Working papers · Drafting</p></div></article>
+        <article class="timeline-item"><span>28 AUG</span><div><strong>DAY 03 · RESOLUTION</strong><p>Draft resolution discussion · Voting procedure · Awards · Closing ceremony</p></div></article>
+      </div>
+    </section>
+
+    <section class="section delegate-guide">
+      <div class="section-label">04 / DELEGATE GUIDE</div>
+      <div class="guide-grid">
+        <article><span>01</span><h3>Research</h3><p>Know your country's position, relevant international law and the agenda before entering committee.</p></article>
+        <article><span>02</span><h3>Debate</h3><p>Prepare a clear opening statement, useful points of information and practical solutions.</p></article>
+        <article><span>03</span><h3>Negotiate</h3><p>Build blocs, compromise intelligently and turn ideas into workable clauses.</p></article>
+        <article><span>04</span><h3>Participate</h3><p>Stay active, respectful and diplomatic throughout the virtual conference.</p></article>
+      </div>
+    </section>
+
+    <section id="payment" class="section payment">
+      <div class="section-label">05 / PAYMENT</div>
+      <div class="payment-box">
+        <div><p class="eyebrow">REGISTRATION FEE</p><h2>PKR <strong>500</strong></h2><p>Send the registration fee through Easypaisa, then upload your payment screenshot in the registration form.</p></div>
+        <div class="account-card"><span>EASYPAISA</span><strong>NADEEM AHMED</strong><b>03434296090</b><small>Account / Mobile Number</small><button type="button" class="copy-button" data-copy="03434296090">Copy number</button></div>
+      </div>
+    </section>
+
+    <section id="register" class="section register">
+      <div class="section-label">06 / REGISTER</div>
+      <div class="register-head"><h2>Claim your <em>seat.</em></h2><p>Complete the form and attach a clear screenshot of your PKR 500 payment.</p></div>
       <form id="registrationForm" class="form" novalidate>
-        <div class="field-grid"><label>Full name<input name="fullName" type="text" placeholder="Your full name" required /></label><label>Email address<input name="email" type="email" placeholder="you@example.com" required /></label><label>WhatsApp / phone<input name="phone" type="tel" placeholder="03XXXXXXXXX" required /></label><label>City / country<input name="location" type="text" placeholder="e.g. Islamabad, Pakistan" required /></label></div>
+        <div class="field-grid"><label>Full name<input name="fullName" type="text" placeholder="Your full name" autocomplete="name" required /></label><label>Email address<input name="email" type="email" placeholder="you@example.com" autocomplete="email" required /></label><label>WhatsApp / phone<input name="phone" type="tel" placeholder="03XXXXXXXXX" autocomplete="tel" required /></label><label>City / country<input name="location" type="text" placeholder="e.g. Islamabad, Pakistan" autocomplete="country-name" required /></label></div>
         <label>Committee preference<select name="committee" id="committeeSelect" required><option value="" selected disabled>Select a committee</option><option>PNA — Pakistan National Assembly</option><option>UNSC — United Nations Security Council</option><option>UNHRC — United Nations Human Rights Council</option></select></label>
         <label>Country preference<select name="countryPreference" required><option value="" selected disabled>Select your preferred country</option><option>Pakistan</option><option>United Kingdom</option><option>United States</option><option>China</option><option>Russia</option><option>France</option><option>Germany</option><option>India</option><option>Saudi Arabia</option><option>United Arab Emirates</option><option>Türkiye</option><option>Iran</option><option>Afghanistan</option><option>Australia</option><option>Canada</option><option>Japan</option><option>South Korea</option><option>Brazil</option><option>Egypt</option><option>South Africa</option></select></label>
         <label id="personalityField" style="display:none">PNA Personality Preference<select name="personalityPreference" id="personalityPreference"><option value="" selected disabled>Select your preferred personality</option><option>Zulfikar Ali Bhutto</option><option>Benazir Bhutto</option><option>Nawaz Sharif</option><option>Imran Khan</option><option>Muhammad Khan Junejo</option><option>Yousaf Raza Gillani</option><option>Raja Pervaiz Ashraf</option><option>Shaukat Aziz</option><option>Zafarullah Khan Jamali</option><option>Chaudhry Shujaat Hussain</option><option>Aitzaz Ahsan</option><option>Khurshid Mahmood Kasuri</option><option>Shah Mahmood Qureshi</option><option>Hina Rabbani Khar</option><option>Sartaj Aziz</option><option>Khawaja Muhammad Asif</option><option>Ishaq Dar</option><option>Maulana Fazlur Rehman</option><option>Asfandyar Wali Khan</option><option>Sheikh Rashid Ahmed</option></select></label>
@@ -28,8 +120,21 @@
         <button class="button primary submit" type="submit">Submit registration <span>↗</span></button><p id="formMessage" class="form-message" role="status"></p>
       </form>
     </section>
+
+    <section id="faq" class="section faq-section">
+      <div class="section-label">07 / FAQ</div>
+      <div class="faq-list">
+        <details><summary>Is FQMUN completely online?</summary><p>Yes. FQMUN 2026 is a virtual Model United Nations conference running from 26–28 August.</p></details>
+        <details><summary>What is the registration fee?</summary><p>The registration fee is PKR 500. Payment instructions are shown above and the receipt screenshot is required during registration.</p></details>
+        <details><summary>When will my registration be approved?</summary><p>Registrations are reviewed after payment verification. Keep your registration ID and payment receipt safe.</p></details>
+        <details><summary>What should I prepare before committee?</summary><p>Research your country or personality, understand the agenda, prepare an opening speech and come ready to negotiate.</p></details>
+        <details><summary>Where will the online meeting link be shared?</summary><p>Conference access details and announcements will be shared with registered delegates through the official communication channels.</p></details>
+      </div>
+    </section>
   </main>
+
   <footer><div class="brand"><span>FQ</span>MUN</div><p>26–28 AUGUST 2026 · ONLINE MODEL UNITED NATIONS</p><a href="https://www.instagram.com/fqmun26" target="_blank" rel="noopener">Instagram ↗</a></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
   <script src="script.js"></script>
 </body>
 </html>
