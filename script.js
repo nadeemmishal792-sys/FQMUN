@@ -8,21 +8,16 @@ const message = document.getElementById('formMessage');
 const committeeSelect = document.getElementById('committeeSelect');
 const personalityField = document.getElementById('personalityField');
 const personalityPreference = document.getElementById('personalityPreference');
-
-const typeAnchor = committeeSelect?.parentElement;
-
-if (typeAnchor && form && !document.getElementById('registrationType')) {
-  const wrap = document.createElement('label');
-  wrap.innerHTML = `Registration type
-    <select name="registrationType" id="registrationType" required>
-      <option value="Individual Delegate" selected>Individual Delegate</option>
-      <option value="Delegation">Delegation — 5 delegates, PKR 500 total</option>
-      <option value="Observer">Observer</option>
-    </select>`;
-  typeAnchor.parentNode.insertBefore(wrap, typeAnchor);
-}
-
 const registrationType = document.getElementById('registrationType');
+
+const REGISTRATION_TYPE_MAP = {
+  individual: 'Individual Delegate',
+  delegation: 'Delegation',
+  observer: 'Observer',
+  'Individual Delegate': 'Individual Delegate',
+  Delegation: 'Delegation',
+  Observer: 'Observer'
+};
 
 const extraFields = document.createElement('div');
 extraFields.id = 'registrationExtraFields';
@@ -45,82 +40,98 @@ extraFields.innerHTML = `
   </div>
 `;
 
-if (typeAnchor) typeAnchor.parentNode.insertBefore(extraFields, typeAnchor);
+if (committeeSelect && committeeSelect.parentNode) {
+  committeeSelect.parentNode.insertBefore(extraFields, committeeSelect.parentNode.firstChild);
+}
 
 function setRequired(name, required) {
   const el = form?.elements[name];
   if (el) el.required = required;
 }
 
+function getUiRegistrationType() {
+  return registrationType?.value || '';
+}
+
 function updateRegistrationUI() {
-  const type = registrationType?.value || 'Individual Delegate';
-  const delegation = type === 'Delegation';
-  const observer = type === 'Observer';
-  const individual = type === 'Individual Delegate';
+  const type = getUiRegistrationType();
+  const delegation = type === 'delegation';
+  const observer = type === 'observer';
+  const individual = type === 'individual';
 
-  document.getElementById('delegationFields').style.display = delegation ? 'block' : 'none';
-  document.getElementById('observerFields').style.display = observer ? 'block' : 'none';
+  const delegationFields = document.getElementById('delegationFields');
+  const observerFields = document.getElementById('observerFields');
+  if (delegationFields) delegationFields.style.display = delegation ? 'block' : 'none';
+  if (observerFields) observerFields.style.display = observer ? 'block' : 'none';
 
-  ['fullName','email','phone'].forEach(name => setRequired(name, !delegation));
+  ['fullName', 'email', 'phone'].forEach(name => setRequired(name, !delegation));
   setRequired('committee', !observer);
   setRequired('countryPreference', individual);
-  setRequired('personalityPreference', individual && committeeSelect.value === 'PNA — Pakistan National Assembly');
+  setRequired('personalityPreference', individual && committeeSelect?.value === 'PNA — Pakistan National Assembly');
 
   for (let n = 1; n <= 5; n++) {
     setRequired(`delegate${n}Name`, delegation);
     setRequired(`delegate${n}Email`, delegation);
     setRequired(`delegate${n}Phone`, delegation);
   }
-
-  const paymentText = document.querySelector('#payment .payment-box p:not(.eyebrow)');
-  if (paymentText) {
-    paymentText.textContent = delegation
-      ? 'Delegation registration: PKR 500 total for the complete 5-member delegation. Upload the payment screenshot below.'
-      : 'Registration fee: PKR 500. Send the fee through Easypaisa, then upload your payment screenshot below.';
-  }
 }
 
 registrationType?.addEventListener('change', updateRegistrationUI);
 
 function showFile() {
-  const f = fileInput.files[0];
-  fileName.textContent = f ? `Selected: ${f.name}` : '';
+  const f = fileInput?.files?.[0];
+  if (fileName) fileName.textContent = f ? `Selected: ${f.name}` : '';
 }
 
-fileInput.addEventListener('change', showFile);
+fileInput?.addEventListener('change', showFile);
 
-committeeSelect.addEventListener('change', () => {
+committeeSelect?.addEventListener('change', () => {
   const isPNA = committeeSelect.value === 'PNA — Pakistan National Assembly';
-  personalityField.style.display = isPNA ? 'block' : 'none';
-  personalityPreference.required = isPNA && registrationType.value === 'Individual Delegate';
-  if (!isPNA) personalityPreference.value = '';
+  if (personalityField) personalityField.style.display = isPNA ? 'block' : 'none';
+  if (personalityPreference) {
+    personalityPreference.required = isPNA && getUiRegistrationType() === 'individual';
+    if (!isPNA) personalityPreference.value = '';
+  }
+  updateRegistrationUI();
 });
 
-['dragenter','dragover'].forEach(e => dropzone.addEventListener(e, x => x.preventDefault()));
-['dragleave','drop'].forEach(e => dropzone.addEventListener(e, x => x.preventDefault()));
-dropzone.addEventListener('drop', e => {
-  const f = e.dataTransfer.files;
-  if (f.length) { fileInput.files = f; showFile(); }
+['dragenter', 'dragover'].forEach(eventName => {
+  dropzone?.addEventListener(eventName, event => event.preventDefault());
+});
+['dragleave', 'drop'].forEach(eventName => {
+  dropzone?.addEventListener(eventName, event => event.preventDefault());
+});
+dropzone?.addEventListener('drop', event => {
+  const files = event.dataTransfer?.files;
+  if (files?.length && fileInput) {
+    fileInput.files = files;
+    showFile();
+  }
 });
 
 function toDataURL(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result);
-    r.onerror = rej;
-    r.readAsDataURL(file);
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
   });
 }
 
 function field(name) {
-  const el = form.elements[name];
-  return el ? el.value.trim() : '';
+  const el = form?.elements[name];
+  return el ? String(el.value || '').trim() : '';
 }
 
 async function buildPayload(file) {
-  const type = field('registrationType') || 'Individual Delegate';
+  const rawType = field('registrationType');
+  const registrationTypeForBackend = REGISTRATION_TYPE_MAP[rawType];
+  if (!registrationTypeForBackend) {
+    throw new Error('Please select a valid registration type.');
+  }
+
   const payload = {
-    registrationType: type,
+    registrationType: registrationTypeForBackend,
     fullName: field('fullName'),
     email: field('email'),
     phone: field('phone'),
@@ -138,12 +149,12 @@ async function buildPayload(file) {
     payload[`delegate${n}Email`] = field(`delegate${n}Email`);
     payload[`delegate${n}Phone`] = field(`delegate${n}Phone`);
   }
-
   return payload;
 }
 
-form.addEventListener('submit', async e => {
-  e.preventDefault();
+form?.addEventListener('submit', async event => {
+  event.preventDefault();
+  if (!message) return;
   message.className = 'form-message';
   message.textContent = '';
 
@@ -152,41 +163,44 @@ form.addEventListener('submit', async e => {
     return;
   }
 
-  const f = fileInput.files[0];
-  if (!f || f.size > 4 * 1024 * 1024) {
+  const file = fileInput?.files?.[0];
+  if (!file || file.size > 4 * 1024 * 1024) {
     message.className = 'form-message error';
     message.textContent = 'Please upload a payment screenshot smaller than 4 MB.';
     return;
   }
 
-  const b = form.querySelector('.submit');
-  b.disabled = true;
-  b.textContent = 'Submitting…';
+  const button = form.querySelector('.submit');
+  if (button) {
+    button.disabled = true;
+    button.textContent = 'Submitting…';
+  }
 
   try {
-    const payload = await buildPayload(f);
-    const r = await fetch(REGISTRATION_ENDPOINT, {
+    const payload = await buildPayload(file);
+    const response = await fetch(REGISTRATION_ENDPOINT, {
       method: 'POST',
-      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
-    const d = await r.json();
-    if (!d.ok) throw Error(d.error || 'Registration could not be submitted.');
+    const data = await response.json();
+    if (!data.ok) throw new Error(data.error || 'Registration could not be submitted.');
 
     message.className = 'form-message success';
-    message.textContent = `Registration successful! Your ID is ${d.registrationId}. Keep your payment receipt.`;
+    message.textContent = `Registration successful! Your ID is ${data.registrationId}. Keep your payment receipt.`;
     form.reset();
-    fileName.textContent = '';
-    personalityField.style.display = 'none';
-    personalityPreference.required = false;
-    registrationType.value = 'Individual Delegate';
+    if (fileName) fileName.textContent = '';
+    if (personalityField) personalityField.style.display = 'none';
+    if (personalityPreference) personalityPreference.required = false;
     updateRegistrationUI();
-  } catch (err) {
+  } catch (error) {
     message.className = 'form-message error';
-    message.textContent = err.message || 'Registration could not be submitted. Please try again.';
+    message.textContent = error.message || 'Registration could not be submitted. Please try again.';
   } finally {
-    b.disabled = false;
-    b.innerHTML = 'Submit registration <span>↗</span>';
+    if (button) {
+      button.disabled = false;
+      button.innerHTML = 'Submit registration <span>↗</span>';
+    }
   }
 });
 
@@ -196,23 +210,27 @@ const countdown = document.getElementById('countdown');
 function updateCountdown() {
   if (!countdown) return;
   const target = new Date('2026-08-26T00:00:00+05:00').getTime();
-  const now = Date.now();
-  const diff = target - now;
-  if (diff <= 0) { countdown.textContent = 'FQMUN IS LIVE'; return; }
+  const diff = target - Date.now();
+  if (diff <= 0) {
+    countdown.textContent = 'FQMUN IS LIVE';
+    return;
+  }
   const d = Math.floor(diff / 86400000);
-  const h = Math.floor(diff % 86400000 / 3600000);
-  const m = Math.floor(diff % 3600000 / 60000);
-  const s = Math.floor(diff % 60000 / 1000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
   countdown.textContent = `${d}d ${h}h ${m}m ${s}s`;
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
 
-document.querySelectorAll('[data-copy]').forEach(btn => btn.addEventListener('click', async () => {
-  try {
-    await navigator.clipboard.writeText(btn.dataset.copy);
-    const old = btn.textContent;
-    btn.textContent = 'Copied ✓';
-    setTimeout(() => btn.textContent = old, 1500);
-  } catch (e) {}
-}));
+document.querySelectorAll('[data-copy]').forEach(button => {
+  button.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(button.dataset.copy || '');
+      const oldText = button.textContent;
+      button.textContent = 'Copied ✓';
+      setTimeout(() => button.textContent = oldText, 1500);
+    } catch (error) {}
+  });
+});
