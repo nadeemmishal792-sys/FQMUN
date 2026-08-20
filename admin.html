@@ -11,206 +11,42 @@
 <style>
 :root{--ink:#171614;--paper:#f4f0e8;--card:#fffdf8;--line:#d9d1c3;--muted:#746e65;--accent:#a35b35;--ok:#356b50;--warn:#9b6b1f;--bad:#8a3829}
 *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif}.hidden{display:none!important}
-.login{min-height:100vh;display:grid;place-items:center;padding:24px}.login-card{width:min(430px,100%);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:36px;box-shadow:0 22px 60px #251d1415}.logo{font:800 34px 'Playfair Display';margin-bottom:8px}.logo span{color:#c8794e}.eyebrow{font-size:10px;letter-spacing:.18em;color:var(--muted);font-weight:700}.login-card h1{font:700 30px 'Playfair Display';margin:8px 0}.login-card p{color:var(--muted);font-size:13px;line-height:1.6}.field{display:grid;gap:7px;margin:17px 0}.field label{font-size:12px;font-weight:700}.field input{width:100%;padding:13px;border:1px solid var(--line);border-radius:8px;background:#fff;font:14px 'DM Sans';outline:0}.field input:focus{border-color:var(--accent)}button{border:0;cursor:pointer}.primary{width:100%;padding:13px;border-radius:8px;background:#1b1917;color:#fff;font:700 14px 'DM Sans'}.msg{font-size:12px!important;margin-top:12px}.error{color:var(--bad)!important}
-.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{background:#1b1917;color:#f8f2e8;padding:25px 16px;display:flex;flex-direction:column;min-height:100vh}.brand{font:800 25px 'Playfair Display';padding:0 12px 28px}.brand span{color:#c8794e}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#bbb4ab;text-align:left;padding:12px 13px;border-radius:8px;font:600 13px 'DM Sans'}.nav button.active,.nav button:hover{background:#302b27;color:#fff}.side-note{margin-top:auto;border-top:1px solid #3b3631;padding:16px 12px;color:#9f988f;font-size:11px;line-height:1.6}.main{padding:32px 4vw 60px;max-width:1500px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:25px}.top h1{font:700 clamp(30px,4vw,46px) 'Playfair Display';margin:4px 0}.top p{margin:0;color:var(--muted);font-size:13px}.actions{display:flex;gap:8px}.btn{padding:10px 13px;border-radius:8px;font:700 12px 'DM Sans';background:#fff;border:1px solid var(--line)}.btn.dark{background:#1b1917;color:#fff;border-color:#1b1917}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:12px}.card{padding:19px}.label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}.card strong{display:block;font:700 32px 'Playfair Display';margin-top:8px}.card small{color:var(--muted)}.panel{overflow:hidden;margin-bottom:18px}.panel-head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.panel-head h2{font:700 19px 'Playfair Display';margin:0}.search{margin:14px 19px;padding:11px 12px;width:calc(100% - 38px);border:1px solid var(--line);border-radius:8px;background:#fff}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:12px 13px;border-top:1px solid #e8e1d6;white-space:nowrap}.table th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.pill{display:inline-flex;padding:4px 7px;border-radius:99px;font-size:9px;font-weight:700}.pending{background:#f6ecd3;color:var(--warn)}.verified{background:#e1eee6;color:var(--ok)}.rejected{background:#f2dfd9;color:var(--bad)}.row-actions{display:flex;gap:5px}.row-actions button{padding:6px 8px;border-radius:6px;font-size:10px;font-weight:700}.approve{background:#e1eee6;color:var(--ok)}.reject{background:#f2dfd9;color:var(--bad)}.payment-link{color:var(--accent);text-decoration:none;font-weight:700}.empty{text-align:center;padding:35px;color:var(--muted)}.notice{padding:13px 15px;background:#eee6da;border:1px solid var(--line);border-radius:9px;color:#5e574e;font-size:11px;line-height:1.6}.toast{position:fixed;right:20px;bottom:20px;background:#1b1917;color:#fff;padding:12px 15px;border-radius:8px;font-size:12px;box-shadow:0 10px 30px #0003}
-@media(max-width:900px){.app{grid-template-columns:1fr}.side{min-height:auto}.nav{display:flex;overflow:auto}.side-note{display:none}.cards{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}}@media(max-width:500px){.cards{grid-template-columns:1fr}.login-card{padding:26px}}
+.login{min-height:100vh;display:grid;place-items:center;padding:24px}.login-card{width:min(430px,100%);background:var(--card);border:1px solid var(--line);border-radius:16px;padding:36px;box-shadow:0 22px 60px #251d1415}.logo{font:800 34px 'Playfair Display';margin-bottom:8px}.logo span{color:#c8794e}.eyebrow{font-size:10px;letter-spacing:.18em;color:var(--muted);font-weight:700}.login-card h1{font:700 30px 'Playfair Display';margin:8px 0}.login-card p{color:var(--muted);font-size:13px;line-height:1.6}.field{display:grid;gap:7px;margin:17px 0}.field label{font-size:12px;font-weight:700}.field input,.field select{width:100%;padding:11px;border:1px solid var(--line);border-radius:8px;background:#fff;font:14px 'DM Sans';outline:0}.field input:focus,.field select:focus{border-color:var(--accent)}button{border:0;cursor:pointer}.primary{width:100%;padding:13px;border-radius:8px;background:#1b1917;color:#fff;font:700 14px 'DM Sans'}.msg{font-size:12px!important;margin-top:12px}.error{color:var(--bad)!important}
+.app{min-height:100vh;display:grid;grid-template-columns:245px 1fr}.side{background:#1b1917;color:#f8f2e8;padding:25px 16px;display:flex;flex-direction:column;min-height:100vh}.brand{font:800 25px 'Playfair Display';padding:0 12px 28px}.brand span{color:#c8794e}.nav{display:grid;gap:6px}.nav button{background:transparent;color:#bbb4ab;text-align:left;padding:12px 13px;border-radius:8px;font:600 13px 'DM Sans'}.nav button.active,.nav button:hover{background:#302b27;color:#fff}.side-note{margin-top:auto;border-top:1px solid #3b3631;padding:16px 12px;color:#9f988f;font-size:11px;line-height:1.6}.main{padding:32px 4vw 60px;max-width:1500px;width:100%;margin:auto}.top{display:flex;justify-content:space-between;gap:20px;align-items:center;margin-bottom:25px}.top h1{font:700 clamp(30px,4vw,46px) 'Playfair Display';margin:4px 0}.top p{margin:0;color:var(--muted);font-size:13px}.actions{display:flex;gap:8px}.btn{padding:10px 13px;border-radius:8px;font:700 12px 'DM Sans';background:#fff;border:1px solid var(--line)}.btn.dark{background:#1b1917;color:#fff;border-color:#1b1917}.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin-bottom:20px}.card,.panel{background:var(--card);border:1px solid var(--line);border-radius:12px}.card{padding:19px}.label{font-size:10px;text-transform:uppercase;letter-spacing:.09em;color:var(--muted);font-weight:700}.card strong{display:block;font:700 32px 'Playfair Display';margin-top:8px}.card small{color:var(--muted)}.panel{overflow:hidden;margin-bottom:18px}.panel-head{padding:17px 19px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.panel-head h2{font:700 19px 'Playfair Display';margin:0}.search{margin:14px 19px;padding:11px 12px;width:calc(100% - 38px);border:1px solid var(--line);border-radius:8px;background:#fff}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;font-size:12px}.table th,.table td{text-align:left;padding:12px 13px;border-top:1px solid #e8e1d6;white-space:nowrap}.table th{font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.pill{display:inline-flex;padding:4px 7px;border-radius:99px;font-size:9px;font-weight:700}.pending{background:#f6ecd3;color:var(--warn)}.verified{background:#e1eee6;color:var(--ok)}.rejected{background:#f2dfd9;color:var(--bad)}.row-actions{display:flex;gap:5px;flex-wrap:wrap}.row-actions button{padding:6px 8px;border-radius:6px;font-size:10px;font-weight:700}.approve{background:#e1eee6;color:var(--ok)}.reject{background:#f2dfd9;color:var(--bad)}.assign{background:#eee3d8;color:#6d442d}.payment-link{color:var(--accent);text-decoration:none;font-weight:700}.empty{text-align:center;padding:35px;color:var(--muted)}.notice{padding:13px 15px;background:#eee6da;border:1px solid var(--line);border-radius:9px;color:#5e574e;font-size:11px;line-height:1.6}.toast{position:fixed;right:20px;bottom:20px;background:#1b1917;color:#fff;padding:12px 15px;border-radius:8px;font-size:12px;box-shadow:0 10px 30px #0003;z-index:30}
+.modal-backdrop{position:fixed;inset:0;background:#17161499;display:grid;place-items:center;padding:20px;z-index:20}.modal{width:min(1050px,100%);max-height:90vh;overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 25px 80px #0005}.modal-head{padding:20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.modal-head h2{font:700 24px 'Playfair Display';margin:0 0 4px}.modal-head p{margin:0;color:var(--muted);font-size:12px}.close{background:#eee6da;border-radius:7px;padding:8px 11px;font-weight:700}.allocation-list{padding:20px}.allocation-row{display:grid;grid-template-columns:1.1fr 1.3fr 1.3fr 1.5fr;gap:10px;padding:14px 0;border-bottom:1px solid #e8e1d6}.allocation-row:last-child{border-bottom:0}.delegate-label{font-weight:700;font-size:12px;padding-top:12px}.allocation-row label{display:block;font-size:9px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:700;margin-bottom:5px}.allocation-row select{width:100%;padding:10px;border:1px solid var(--line);border-radius:7px;background:#fff;font:12px 'DM Sans'}.modal-foot{padding:16px 20px;border-top:1px solid var(--line);display:flex;justify-content:flex-end;gap:8px}.btn.save{background:#1b1917;color:#fff}.modal-msg{margin:0 20px 10px;color:var(--bad);font-size:12px}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{min-height:auto}.nav{display:flex;overflow:auto}.side-note{display:none}.cards{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}.allocation-row{grid-template-columns:1fr 1fr}}@media(max-width:500px){.cards{grid-template-columns:1fr}.login-card{padding:26px}.allocation-row{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<section id="login" class="login">
-  <div class="login-card">
-    <div class="logo"><span>FQ</span>MUN</div>
-    <div class="eyebrow">PRIVATE ADMIN PORTAL · 2026</div>
-    <h1>Admin sign in</h1>
-    <p>This area is restricted to authorized FQMUN administrators.</p>
-    <form id="loginForm">
-      <div class="field"><label for="username">Username</label><input id="username" autocomplete="username" required></div>
-      <div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div>
-      <button class="primary" id="loginBtn" type="submit">Sign in securely</button>
-      <p id="loginMsg" class="msg"></p>
-    </form>
-  </div>
-</section>
-
-<section id="portal" class="app hidden">
-  <aside class="side">
-    <div class="brand"><span>FQ</span>MUN <small style="font:600 9px 'DM Sans';letter-spacing:.15em;color:#8d857c">ADMIN</small></div>
-    <nav class="nav"><button class="active" type="button">Dashboard</button></nav>
-    <div class="side-note">26–28 AUGUST 2026 · ONLINE<br><br>Authenticated administrator session.</div>
-  </aside>
-
-  <main class="main">
-    <header class="top">
-      <div><div class="eyebrow">FQMUN 2026 · CONTROL CENTER</div><h1>Admin Dashboard</h1><p>Manage registrations and payment status.</p></div>
-      <div class="actions"><button class="btn" id="refresh" type="button">Refresh</button><button class="btn dark" id="logout" type="button">Logout</button></div>
-    </header>
-
-    <section class="cards">
-      <div class="card"><span class="label">Total</span><strong id="total">—</strong><small>Registrations</small></div>
-      <div class="card"><span class="label">Verified</span><strong id="verified">—</strong><small>Approved</small></div>
-      <div class="card"><span class="label">Pending</span><strong id="pending">—</strong><small>Needs review</small></div>
-      <div class="card"><span class="label">Rejected</span><strong id="rejected">—</strong><small>Declined</small></div>
-    </section>
-
-    <section class="panel">
-      <div class="panel-head"><h2>Registrations</h2><span id="count">—</span></div>
-      <input id="search" class="search" placeholder="Search name, email, ID, committee or delegation" autocomplete="off">
-      <div class="table-wrap">
-        <table class="table">
-          <thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Committee</th><th>Delegation</th><th>Status</th><th>Payment</th><th>Action</th></tr></thead>
-          <tbody id="rows"><tr><td colspan="8" class="empty">Loading…</td></tr></tbody>
-        </table>
-      </div>
-    </section>
-
-    <div class="notice"><b>Security:</b> the admin password is not stored in this GitHub page. Login is checked by Google Apps Script using Script Properties, and the session token is kept only in the browser session.</div>
-  </main>
-</section>
-
+<section id="login" class="login"><div class="login-card"><div class="logo"><span>FQ</span>MUN</div><div class="eyebrow">PRIVATE ADMIN PORTAL · 2026</div><h1>Admin sign in</h1><p>This area is restricted to authorized FQMUN administrators.</p><form id="loginForm"><div class="field"><label for="username">Username</label><input id="username" autocomplete="username" required></div><div class="field"><label for="password">Password</label><input id="password" type="password" autocomplete="current-password" required></div><button class="primary" id="loginBtn" type="submit">Sign in securely</button><p id="loginMsg" class="msg"></p></form></div></section>
+<section id="portal" class="app hidden"><aside class="side"><div class="brand"><span>FQ</span>MUN <small style="font:600 9px 'DM Sans';letter-spacing:.15em;color:#8d857c">ADMIN</small></div><nav class="nav"><button class="active" type="button">Dashboard</button></nav><div class="side-note">26–28 AUGUST 2026 · ONLINE<br><br>Authenticated administrator session.</div></aside>
+<main class="main"><header class="top"><div><div class="eyebrow">FQMUN 2026 · CONTROL CENTER</div><h1>Admin Dashboard</h1><p>Manage registrations, payments and delegate allocations.</p></div><div class="actions"><button class="btn" id="refresh" type="button">Refresh</button><button class="btn dark" id="logout" type="button">Logout</button></div></header>
+<section class="cards"><div class="card"><span class="label">Total</span><strong id="total">—</strong><small>Registrations</small></div><div class="card"><span class="label">Verified</span><strong id="verified">—</strong><small>Approved</small></div><div class="card"><span class="label">Pending</span><strong id="pending">—</strong><small>Needs review</small></div><div class="card"><span class="label">Rejected</span><strong id="rejected">—</strong><small>Declined</small></div></section>
+<section class="panel"><div class="panel-head"><h2>Registrations</h2><span id="count">—</span></div><input id="search" class="search" placeholder="Search name, email, ID, committee or delegation" autocomplete="off"><div class="table-wrap"><table class="table"><thead><tr><th>ID</th><th>Name</th><th>Type</th><th>Committee</th><th>Delegation</th><th>Status</th><th>Payment</th><th>Action</th></tr></thead><tbody id="rows"><tr><td colspan="8" class="empty">Loading…</td></tr></tbody></table></div></section>
+<div class="notice"><b>Allocation:</b> only verified registrations can be allocated. A delegation may have different committees/countries for its five delegates, including PNA, UNSC and UNHRC in the same delegation. Country duplication is checked by the backend. PNA personality is required only for PNA delegates.</div><br><div class="notice"><b>Security:</b> the admin password is not stored in this GitHub page. Login is checked by Google Apps Script using Script Properties, and the session token is kept only in the browser session.</div></main></section>
 <div id="toast" class="toast hidden"></div>
-
+<div id="allocationModal" class="modal-backdrop hidden"><div class="modal"><div class="modal-head"><div><h2>Delegate Allocation</h2><p id="allocationSubtitle">Assign committee, country and PNA personality.</p></div><button class="close" id="closeAllocation" type="button">Close</button></div><div id="allocationRows" class="allocation-list"></div><p id="allocationMsg" class="modal-msg"></p><div class="modal-foot"><button class="btn" id="cancelAllocation" type="button">Cancel</button><button class="btn save" id="saveAllocation" type="button">Save Allocation</button></div></div></div>
 <script>
 const ADMIN_API='https://script.google.com/macros/s/AKfycbwnUSLioKlBZrLepPmkrQh9Qgnwb1LfzgyQGNR-MutuyUgeo8jn8plXd_3B81sgRULN/exec';
-let token=sessionStorage.getItem('fqmun_admin_token')||'';
-let registrations=[];
-const $=id=>document.getElementById(id);
-
-function toast(text){
-  $('toast').textContent=text;
-  $('toast').classList.remove('hidden');
-  setTimeout(()=>$('toast').classList.add('hidden'),2600);
-}
-
-async function api(action,data={}){
-  const response=await fetch(ADMIN_API,{
-    method:'POST',
-    headers:{'Content-Type':'text/plain;charset=utf-8'},
-    body:JSON.stringify({action,token,...data})
-  });
-  const result=await response.json();
-  if(!result.ok) throw new Error(result.error||'Request failed.');
-  return result;
-}
-
-function showPortal(){
-  $('login').classList.add('hidden');
-  $('portal').classList.remove('hidden');
-  loadData();
-}
-
-$('loginForm').addEventListener('submit',async event=>{
-  event.preventDefault();
-  $('loginBtn').disabled=true;
-  $('loginMsg').textContent='';
-  try{
-    const result=await api('adminLogin',{
-      username:$('username').value.trim(),
-      password:$('password').value
-    });
-    token=result.token;
-    sessionStorage.setItem('fqmun_admin_token',token);
-    showPortal();
-  }catch(error){
-    $('loginMsg').className='msg error';
-    $('loginMsg').textContent=error.message;
-  }finally{
-    $('loginBtn').disabled=false;
-  }
-});
-
-$('logout').addEventListener('click',async()=>{
-  try{if(token) await api('adminLogout');}catch(error){}
-  sessionStorage.removeItem('fqmun_admin_token');
-  token='';
-  registrations=[];
-  $('portal').classList.add('hidden');
-  $('login').classList.remove('hidden');
-  $('password').value='';
-});
-
-$('refresh').addEventListener('click',loadData);
-$('search').addEventListener('input',render);
-
-async function loadData(){
-  if(!token)return;
-  $('rows').innerHTML='<tr><td colspan="8" class="empty">Loading…</td></tr>';
-  try{
-    const result=await api('adminGetData');
-    registrations=result.registrations||[];
-    const stats=result.statistics||{};
-    $('total').textContent=stats.total??0;
-    $('verified').textContent=stats.verified??0;
-    $('pending').textContent=stats.pending??0;
-    $('rejected').textContent=stats.rejected??0;
-    $('count').textContent=registrations.length+' records';
-    render();
-  }catch(error){
-    if(/session|login|auth|token/i.test(error.message)){
-      sessionStorage.removeItem('fqmun_admin_token');
-      token='';
-      $('portal').classList.add('hidden');
-      $('login').classList.remove('hidden');
-      $('loginMsg').className='msg error';
-      $('loginMsg').textContent=error.message;
-    }else{
-      $('rows').innerHTML='<tr><td colspan="8" class="empty">'+escapeHtml(error.message)+'</td></tr>';
-    }
-  }
-}
-
-function escapeHtml(value){
-  return String(value??'').replace(/[&<>"']/g,char=>({
-    '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
-  }[char]));
-}
-
-function statusClass(status){
-  const value=String(status||'Pending Review').toLowerCase();
-  if(value.includes('verif'))return 'verified';
-  if(value.includes('reject'))return 'rejected';
-  return 'pending';
-}
-
-function render(){
-  const query=$('search').value.toLowerCase().trim();
-  const list=registrations.filter(reg=>JSON.stringify(reg).toLowerCase().includes(query));
-  if(!list.length){
-    $('rows').innerHTML='<tr><td colspan="8" class="empty">No registrations found.</td></tr>';
-    return;
-  }
-
-  $('rows').innerHTML=list.map(reg=>{
-    const id=String(reg['Registration ID']||'');
-    const payment=String(reg['Payment Proof']||'');
-    const paymentCell=payment
-      ? '<a class="payment-link" href="'+escapeHtml(payment)+'" target="_blank" rel="noopener">Open</a>'
-      : '—';
-    return '<tr>'+
-      '<td>'+escapeHtml(id)+'</td>'+
-      '<td>'+escapeHtml(reg['Full Name']||'')+'</td>'+
-      '<td>'+escapeHtml(reg['Registration Type']||'')+'</td>'+
-      '<td>'+escapeHtml(reg['Committee']||'')+'</td>'+
-      '<td>'+escapeHtml(reg['Delegation Name']||'')+'</td>'+
-      '<td><span class="pill '+statusClass(reg['Status'])+'">'+escapeHtml(reg['Status']||'Pending Review')+'</span></td>'+
-      '<td>'+paymentCell+'</td>'+
-      '<td><div class="row-actions">'+
-        '<button class="approve" type="button" onclick="changeStatus('+JSON.stringify(id)+',\'Verified\')">Approve</button>'+
-        '<button class="reject" type="button" onclick="changeStatus('+JSON.stringify(id)+',\'Rejected\')">Reject</button>'+ 
-      '</div></td>'+ 
-    '</tr>';
-  }).join('');
-}
-
-async function changeStatus(registrationId,status){
-  if(!confirm('Change '+registrationId+' to '+status+'?'))return;
-  try{
-    await api('adminUpdateStatus',{registrationId,status});
-    toast('Registration '+registrationId+' updated.');
-    await loadData();
-  }catch(error){toast(error.message);}
-}
-
+const COMMITTEES=['PNA — Pakistan National Assembly','UNSC — United Nations Security Council','UNHRC — United Nations Human Rights Council'];
+const COUNTRIES=['Pakistan','United Kingdom','United States','China','Russia','France','Germany','India','Saudi Arabia','United Arab Emirates','Türkiye','Iran','Afghanistan','Australia','Canada','Japan','South Korea','Brazil','Egypt','South Africa'];
+const PERSONALITIES=['Zulfikar Ali Bhutto','Benazir Bhutto','Nawaz Sharif','Imran Khan','Muhammad Khan Junejo','Yousaf Raza Gillani','Raja Pervaiz Ashraf','Shaukat Aziz','Zafarullah Khan Jamali','Chaudhry Shujaat Hussain','Aitzaz Ahsan','Khurshid Mahmood Kasuri','Shah Mahmood Qureshi','Hina Rabbani Khar','Sartaj Aziz','Khawaja Muhammad Asif','Ishaq Dar','Maulana Fazlur Rehman','Asfandyar Wali Khan','Sheikh Rashid Ahmed'];
+let token=sessionStorage.getItem('fqmun_admin_token')||'';let registrations=[];let allocationRegistration=null;const $=id=>document.getElementById(id);
+function toast(text){$('toast').textContent=text;$('toast').classList.remove('hidden');setTimeout(()=>$('toast').classList.add('hidden'),2600)}
+async function api(action,data={}){const response=await fetch(ADMIN_API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action,token,...data})});const result=await response.json();if(!result.ok)throw new Error(result.error||'Request failed.');return result}
+function showPortal(){$('login').classList.add('hidden');$('portal').classList.remove('hidden');loadData()}
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();$('loginBtn').disabled=true;$('loginMsg').textContent='';try{const result=await api('adminLogin',{username:$('username').value.trim(),password:$('password').value});token=result.token;sessionStorage.setItem('fqmun_admin_token',token);showPortal()}catch(error){$('loginMsg').className='msg error';$('loginMsg').textContent=error.message}finally{$('loginBtn').disabled=false}});
+$('logout').addEventListener('click',async()=>{try{if(token)await api('adminLogout')}catch(error){}sessionStorage.removeItem('fqmun_admin_token');token='';registrations=[];$('portal').classList.add('hidden');$('login').classList.remove('hidden');$('password').value=''});
+$('refresh').addEventListener('click',loadData);$('search').addEventListener('input',render);$('closeAllocation').addEventListener('click',closeAllocation);$('cancelAllocation').addEventListener('click',closeAllocation);$('saveAllocation').addEventListener('click',saveAllocation);
+async function loadData(){if(!token)return;$('rows').innerHTML='<tr><td colspan="8" class="empty">Loading…</td></tr>';try{const result=await api('adminGetData');registrations=result.registrations||[];const stats=result.statistics||{};$('total').textContent=stats.total??0;$('verified').textContent=stats.verified??0;$('pending').textContent=stats.pending??0;$('rejected').textContent=stats.rejected??0;$('count').textContent=registrations.length+' records';render()}catch(error){if(/session|login|auth|token/i.test(error.message)){sessionStorage.removeItem('fqmun_admin_token');token='';$('portal').classList.add('hidden');$('login').classList.remove('hidden');$('loginMsg').className='msg error';$('loginMsg').textContent=error.message}else $('rows').innerHTML='<tr><td colspan="8" class="empty">'+escapeHtml(error.message)+'</td></tr>'}}
+function escapeHtml(value){return String(value??'').replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]))}
+function statusClass(status){const value=String(status||'Pending Review').toLowerCase();if(value.includes('verif'))return'verified';if(value.includes('reject'))return'rejected';return'pending'}
+function render(){const query=$('search').value.toLowerCase().trim();const list=registrations.filter(reg=>JSON.stringify(reg).toLowerCase().includes(query));if(!list.length){$('rows').innerHTML='<tr><td colspan="8" class="empty">No registrations found.</td></tr>';return}$('rows').innerHTML=list.map(reg=>{const id=String(reg['Registration ID']||'');const payment=String(reg['Payment Proof']||'');const paymentCell=payment?'<a class="payment-link" href="'+escapeHtml(payment)+'" target="_blank" rel="noopener">Open</a>':'—';const type=String(reg['Registration Type']||'');const status=String(reg['Status']||'Pending Review');const allocationAllowed=status.toLowerCase().includes('verif')&&type!=='Observer';return'<tr><td>'+escapeHtml(id)+'</td><td>'+escapeHtml(reg['Full Name']||reg['Delegate 1 Name']||'')+'</td><td>'+escapeHtml(type)+'</td><td>'+escapeHtml(reg['Committee']||'')+'</td><td>'+escapeHtml(reg['Delegation Name']||'')+'</td><td><span class="pill '+statusClass(status)+'">'+escapeHtml(status)+'</span></td><td>'+paymentCell+'</td><td><div class="row-actions"><button class="approve" type="button" onclick="changeStatus('+JSON.stringify(id)+',\'Verified\')">Approve</button><button class="reject" type="button" onclick="changeStatus('+JSON.stringify(id)+',\'Rejected\')">Reject</button>'+(allocationAllowed?'<button class="assign" type="button" onclick="openAllocation('+JSON.stringify(id)+')">Allocate</button>':'')+'</div></td></tr>'}).join('')}
+async function changeStatus(registrationId,status){if(!confirm('Change '+registrationId+' to '+status+'?'))return;try{await api('adminUpdateStatus',{registrationId,status});toast('Registration '+registrationId+' updated.');await loadData()}catch(error){toast(error.message)}}
+function optionHtml(values,selected,placeholder){return'<option value="">'+placeholder+'</option>'+values.map(v=>'<option value="'+escapeHtml(v)+'" '+(v===selected?'selected':'')+'>'+escapeHtml(v)+'</option>').join('')}
+function openAllocation(id){const reg=registrations.find(r=>String(r['Registration ID']||'')===String(id));if(!reg)return;allocationRegistration=reg;const type=String(reg['Registration Type']||'');if(!String(reg['Status']||'').toLowerCase().includes('verif')){toast('Only verified registrations can be allocated.');return}const count=type==='Delegation'?5:1;$('allocationSubtitle').textContent=(reg['Delegation Name']?reg['Delegation Name']+' · ':'')+id+' · '+type;$('allocationMsg').textContent='';let html='';for(let i=1;i<=count;i++){const name=reg['Delegate '+i+' Name']||reg['Full Name']||('Delegate '+i);const assignedCommittee=reg['Assigned Delegate '+i+' Committee']||'';const assignedCountry=reg['Assigned Delegate '+i+' Country']||'';const assignedPersonality=reg['Assigned Delegate '+i+' PNA Personality']||'';html+='<div class="allocation-row"><div class="delegate-label">'+escapeHtml(name)+'</div><div><label>Committee</label><select id="allocCommittee'+i+'" onchange="togglePersonality('+i+')">'+optionHtml(COMMITTEES,assignedCommittee,'Select committee')+'</select></div><div><label>Country</label><select id="allocCountry'+i+'">'+optionHtml(COUNTRIES,assignedCountry,'Select country')+'</select></div><div><label>PNA Personality</label><select id="allocPersonality'+i+'">'+optionHtml(PERSONALITIES,assignedPersonality,'Not applicable')+'</select></div></div>'} $('allocationRows').innerHTML=html;$('allocationModal').classList.remove('hidden');for(let i=1;i<=count;i++)togglePersonality(i)}
+function togglePersonality(i){const committee=$('allocCommittee'+i);const personality=$('allocPersonality'+i);if(!committee||!personality)return;const isPna=committee.value==='PNA — Pakistan National Assembly';personality.disabled=!isPna;if(!isPna)personality.value=''}
+function closeAllocation(){allocationRegistration=null;$('allocationModal').classList.add('hidden');$('allocationRows').innerHTML='';$('allocationMsg').textContent=''}
+async function saveAllocation(){if(!allocationRegistration)return;const type=String(allocationRegistration['Registration Type']||'');const count=type==='Delegation'?5:1;const delegates=[];for(let i=1;i<=count;i++){const committee=$('allocCommittee'+i).value;const country=$('allocCountry'+i).value;const personality=$('allocPersonality'+i).value;if(!committee||!country){$('allocationMsg').textContent='Committee and country are required for every delegate.';return}if(committee==='PNA — Pakistan National Assembly'&&!personality){$('allocationMsg').textContent='PNA personality is required for every PNA delegate.';return}delegates.push({delegateNumber:i,committee,country,personality:committee==='PNA — Pakistan National Assembly'?personality:''})}const seen=new Set();for(const d of delegates){const key=d.committee+'|'+d.country;if(seen.has(key)){$('allocationMsg').textContent='The same country cannot be assigned twice in the same committee within this delegation.';return}seen.add(key)}$('saveAllocation').disabled=true;$('allocationMsg').textContent='Saving…';try{await api('adminAssignDelegates',{registrationId:String(allocationRegistration['Registration ID']||''),delegates});toast('Allocation saved successfully.');closeAllocation();await loadData()}catch(error){$('allocationMsg').textContent=error.message}finally{$('saveAllocation').disabled=false}}
 if(token)showPortal();
-</script>
-</body>
-</html>
+</script></body></html>
