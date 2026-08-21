@@ -266,3 +266,43 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     } catch (error) {}
   });
 });
+
+/* FQMUN STUDY GUIDES + ANNOUNCEMENT HUB */
+(function addStudyGuideFeature() {
+  const guides = {
+    PNA: 'FQMUN_2026_PNA_Study_Guide.pdf',
+    UNSC: 'FQMUN_2026_UNSC_Study_Guide.pdf',
+    UNHRC: 'FQMUN_2026_UNHRC_Study_Guide.pdf'
+  };
+
+  document.querySelectorAll('.committee').forEach(card => {
+    const title = card.querySelector('h3');
+    if (!title) return;
+    const key = title.textContent.trim().toUpperCase();
+    const pdf = guides[key];
+    if (!pdf || card.querySelector('.study-guide-link')) return;
+
+    const link = document.createElement('a');
+    link.className = 'study-guide-link';
+    link.href = pdf;
+    link.target = '_blank';
+    link.rel = 'noopener';
+    link.textContent = 'Study Guide PDF ↗';
+    link.style.cssText = 'display:inline-block;margin-top:10px;color:#ffbf19;text-decoration:none;font-size:11px;font-weight:700;letter-spacing:.4px;';
+    const content = card.querySelector('div');
+    if (content) content.appendChild(link);
+  });
+
+  const grid = document.querySelector('.announcement-grid');
+  if (grid && !grid.querySelector('.study-guide-announcement')) {
+    const announcement = document.createElement('article');
+    announcement.className = 'announcement featured-announcement study-guide-announcement';
+    announcement.innerHTML = `
+      <div class="announcement-meta"><span>NEW · STUDY GUIDES</span><time>UPLOADED</time></div>
+      <h3>FQMUN committee study guides are now available</h3>
+      <p>Official preparation PDFs for PNA, UNSC and UNHRC have been uploaded. Each guide includes committee preparation, research guidance, sample speeches, POIs, rebuttals and drafting examples.</p>
+      <a href="study-guides.html">Open the Study Guide Hub ↗</a>
+    `;
+    grid.insertBefore(announcement, grid.firstChild);
+  }
+})();
