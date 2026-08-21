@@ -152,6 +152,28 @@ async function buildPayload(file) {
   return payload;
 }
 
+async function readRegistrationResponse(response) {
+  const text = await response.text();
+  const trimmed = text.trim();
+
+  if (!trimmed) {
+    throw new Error('The registration server returned an empty response. Please try again.');
+  }
+
+  if (/^<!doctype\s+html/i.test(trimmed) || /^<html[\s>]/i.test(trimmed)) {
+    throw new Error('The registration server returned a Google HTML page instead of registration data. Please contact the FQMUN admin.');
+  }
+
+  let data;
+  try {
+    data = JSON.parse(trimmed);
+  } catch (error) {
+    throw new Error('The registration server returned an invalid response. Please try again.');
+  }
+
+  return data;
+}
+
 form?.addEventListener('submit', async event => {
   event.preventDefault();
   if (!message) return;
@@ -183,11 +205,21 @@ form?.addEventListener('submit', async event => {
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
       body: JSON.stringify(payload)
     });
-    const data = await response.json();
-    if (!data.ok) throw new Error(data.error || 'Registration could not be submitted.');
+
+    const data = await readRegistrationResponse(response);
+
+    if (!data.ok) {
+      throw new Error(data.error || 'Registration could not be submitted.');
+    }
+
+    const registrationId = data.registrationId || data.id || data.registrationID;
+
+    if (!registrationId) {
+      throw new Error('Registration was received, but no registration ID was returned. Please contact the FQMUN admin before submitting again.');
+    }
 
     message.className = 'form-message success';
-    message.textContent = `Registration successful! Your ID is ${data.registrationId}. Keep your payment receipt.`;
+    message.textContent = `Registration successful! Your ID is ${registrationId}. Keep your payment receipt.`;
     form.reset();
     if (fileName) fileName.textContent = '';
     if (personalityField) personalityField.style.display = 'none';
