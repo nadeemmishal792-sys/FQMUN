@@ -1,39 +1,49 @@
-# FQMUN REAL REGISTRATION SETUP
+# FQMUN 2026 — LIVE SYSTEM SETUP
 
-The website is prepared to send real registrations to Google Apps Script. The backend is in `apps-script/Code.gs`.
+The live FQMUN website uses Google Apps Script as its registration and admin API backend.
 
-## One-time setup
+## Current live Apps Script endpoint
 
-1. Sign in to the Google account **fqmun790@gmail.com**.
-2. Open Google Apps Script and create a new project.
-3. Copy everything from `apps-script/Code.gs` in this repository into the Apps Script editor.
-4. Save the project.
-5. Deploy it as **Web app**:
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-6. Authorize the requested Google permissions for Sheets, Drive and Mail.
-7. Copy the generated Web app URL ending in `/exec`.
-8. Open `script.js` in this repository and replace:
-   `PASTE_YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE`
-   with the Web app URL.
-9. Commit the change.
+`https://script.google.com/macros/s/AKfycbwnUSLioKlBZrLepPmkrQh9Qgnwb1LfzgyQGNR-MutuyUgeo8jn8plXd_3B81sgRULN/exec`
 
-## What happens after setup
+The live frontend files are already connected to this exact `/exec` endpoint:
 
-A delegate submits:
-- Full name
-- Email
-- WhatsApp / phone
-- City / country
-- Committee (PNA / UNSC / UNHRC)
-- Payment screenshot
+- `script.js` → delegate registration API
+- `admin.html` → private admin login/dashboard API
 
-The Apps Script backend will automatically:
-- create a Google Sheet called **FQMUN 2026 — Delegate Registrations**;
-- create a Drive folder called **FQMUN Payment Proofs**;
-- assign an ID such as **FQMUN-001**;
-- store the registration details and payment-proof link;
-- set the status to **Pending Review**;
-- email **fqmun790@gmail.com** with the registration details and links.
+## Important deployment settings
 
-Do not put passwords, OTPs, Easypaisa PINs, or private banking credentials in this repository.
+Deploy the Apps Script as a **Web app** with:
+
+- Execute as: **Me**
+- Who has access: **Anyone**
+
+After changing `Code.gs`, create a new deployment version (or update the existing deployment) and make sure the `/exec` URL above is the deployment URL being used by the website.
+
+## Admin authentication
+
+The current admin system is designed to use the persistent session implementation in the latest Apps Script code. Do not restore the old `CacheService`-based admin-token implementation.
+
+The admin portal stores the returned session token in the browser and sends it with every admin API request.
+
+## Registration flow
+
+A delegate submits the registration form on the GitHub Pages website. `script.js` sends the registration to the Apps Script endpoint. Apps Script then handles:
+
+- Google Sheet registration storage
+- Registration IDs
+- Duplicate protection
+- Payment proof upload to Google Drive
+- Admin notification email
+- Delegate confirmation email
+- Registration status
+- Admin verification/rejection
+- Committee/country/personality allocation
+- Allocation email
+- Registration lookup
+
+## Security
+
+Do not commit admin passwords, Script Properties, private Google credentials, OTPs, payment PINs, or other secrets to this repository.
+
+The Apps Script `Code.gs` should remain in the private Google Apps Script project rather than being published in this public repository.
