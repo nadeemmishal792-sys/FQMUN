@@ -306,3 +306,101 @@ document.querySelectorAll('[data-copy]').forEach(button => {
     grid.insertBefore(announcement, grid.firstChild);
   }
 })();
+
+/* FQMUN WHATSAPP COMMUNITY + COMMITTEE QR HUB */
+(function addWhatsAppCommunityHub() {
+  const hub = document.querySelector('#hub');
+  const grid = hub?.querySelector('.announcement-grid');
+  if (!hub || !grid || hub.querySelector('.whatsapp-community-panel')) return;
+
+  const groups = [
+    {
+      name: 'Official FQMUN Community',
+      tag: 'MAIN COMMUNITY',
+      url: 'https://chat.whatsapp.com/Fig9CTzId9GDIOcQ0ZSc8Z'
+    },
+    {
+      name: 'UNSC',
+      tag: 'COMMITTEE GROUP',
+      url: 'https://chat.whatsapp.com/JYpRCVMajkQEbmNosdQkRD?s=qt&p=a&mlu=4'
+    },
+    {
+      name: 'UNHRC',
+      tag: 'COMMITTEE GROUP',
+      url: 'https://chat.whatsapp.com/H688YczVwyKBYvnvNbOSNG?s=qt&p=a&mlu=4'
+    },
+    {
+      name: 'PNA',
+      tag: 'COMMITTEE GROUP',
+      url: 'https://chat.whatsapp.com/H3YI6v12bZn7uxkKqxeHE8?s=qt&p=a&mlu=4'
+    }
+  ];
+
+  const panel = document.createElement('div');
+  panel.className = 'whatsapp-community-panel';
+  panel.style.cssText = [
+    'margin-top:28px',
+    'padding:34px',
+    'border:1px solid rgba(255,191,25,.24)',
+    'background:linear-gradient(145deg,rgba(141,6,16,.28),rgba(7,3,4,.98))',
+    'box-shadow:0 18px 50px rgba(0,0,0,.28)'
+  ].join(';');
+
+  const title = document.createElement('div');
+  title.innerHTML = `
+    <div style="font-size:9px;letter-spacing:2px;font-weight:700;color:#ffbf19;margin-bottom:10px">OFFICIAL WHATSAPP ACCESS</div>
+    <h3 style="font:700 clamp(28px,4vw,44px) 'Playfair Display';color:#ffe27a;margin:0 0 10px">Join the FQMUN <em style="color:#ffbf19">community.</em></h3>
+    <p style="color:#cfc09d;margin:0 0 24px;max-width:760px;font-size:14px">Join the official FQMUN WhatsApp Community first, then enter the WhatsApp group for your allocated committee. Scan the QR code or use the button below.</p>
+  `;
+  panel.appendChild(title);
+
+  const cards = document.createElement('div');
+  cards.style.cssText = 'display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;';
+
+  groups.forEach((group, index) => {
+    const card = document.createElement('div');
+    card.style.cssText = 'background:rgba(255,255,255,.97);color:#101010;border:1px solid rgba(255,191,25,.35);padding:16px;display:flex;flex-direction:column;align-items:center;text-align:center;min-height:300px;';
+
+    const qr = document.createElement('img');
+    qr.alt = `${group.name} WhatsApp QR code`;
+    qr.loading = 'lazy';
+    qr.width = 210;
+    qr.height = 210;
+    qr.style.cssText = 'width:min(100%,210px);height:auto;aspect-ratio:1/1;object-fit:contain;background:#fff;margin:4px auto 14px;';
+    qr.src = 'https://api.qrserver.com/v1/create-qr-code/?size=420x420&margin=12&data=' + encodeURIComponent(group.url);
+    card.appendChild(qr);
+
+    const tag = document.createElement('div');
+    tag.textContent = group.tag;
+    tag.style.cssText = 'font-size:8px;letter-spacing:1.5px;font-weight:800;color:#8d0610;margin-bottom:5px;';
+    card.appendChild(tag);
+
+    const name = document.createElement('div');
+    name.textContent = group.name;
+    name.style.cssText = 'font:700 20px "Playfair Display",serif;color:#111;margin-bottom:12px;';
+    card.appendChild(name);
+
+    const link = document.createElement('a');
+    link.href = group.url;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.textContent = index === 0 ? 'Join Community ↗' : `Join ${group.name} ↗`;
+    link.style.cssText = 'margin-top:auto;display:inline-flex;align-items:center;justify-content:center;width:100%;padding:10px 12px;background:linear-gradient(135deg,#ffe27a,#ffbf19);color:#230305;text-decoration:none;font-size:11px;font-weight:800;';
+    card.appendChild(link);
+
+    cards.appendChild(card);
+  });
+
+  panel.appendChild(cards);
+
+  const note = document.createElement('p');
+  note.innerHTML = '<strong style="color:#ffe27a">Important:</strong> Only join the committee group that matches your final allocation. The main FQMUN Community is for official conference-wide updates.';
+  note.style.cssText = 'margin:18px 0 0;color:#bcae8a;font-size:11px;';
+  panel.appendChild(note);
+
+  grid.insertAdjacentElement('afterend', panel);
+
+  const responsive = document.createElement('style');
+  responsive.textContent = '@media (max-width:900px){.whatsapp-community-panel>div:nth-child(2){grid-template-columns:repeat(2,minmax(0,1fr))!important}}@media (max-width:560px){.whatsapp-community-panel{padding:20px!important}.whatsapp-community-panel>div:nth-child(2){grid-template-columns:1fr!important}}';
+  document.head.appendChild(responsive);
+})();
