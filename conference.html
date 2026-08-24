@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>FQMUN 2026 | Conference Room</title>
+<style>
+:root{--bg:#f4f0e8;--card:#fffdf8;--ink:#171614;--muted:#746e65;--line:#d9d1c3;--gold:#b98218;--ok:#356b50;--bad:#8a3829}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px Arial,Helvetica,sans-serif}.wrap{width:min(1180px,92%);margin:auto}.top{padding:28px 0 18px;display:flex;justify-content:space-between;align-items:center;gap:18px}.brand{font-size:27px;font-weight:800}.brand span{color:#c8794e}.back{color:var(--ink);text-decoration:none;border:1px solid var(--line);padding:9px 13px;border-radius:8px;background:#fff}.hero{padding:42px 0 24px}.eyebrow{font-size:10px;letter-spacing:.18em;color:var(--muted);font-weight:700}.hero h1{font:800 clamp(38px,7vw,72px)/.95 Georgia,serif;margin:12px 0}.hero h1 em{color:var(--gold)}.hero p{max-width:720px;color:var(--muted);line-height:1.7}.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;margin:20px 0;box-shadow:0 15px 45px rgba(30,20,10,.06)}.tabs{display:flex;gap:8px;margin-bottom:20px}.tab{border:1px solid var(--line);background:#fff;padding:10px 14px;border-radius:8px;font-weight:700;cursor:pointer}.tab.active{background:#1b1917;color:#fff}.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.field{display:grid;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:700}.field input,.field select{width:100%;padding:12px;border:1px solid var(--line);border-radius:8px;background:#fff;font:15px Arial}.btn{border:0;border-radius:8px;padding:12px 16px;background:#1b1917;color:#fff;font-weight:700;cursor:pointer}.btn:disabled{opacity:.5}.msg{margin-top:12px;font-size:13px;line-height:1.6}.success{color:var(--ok)}.error{color:var(--bad)}.info{color:var(--muted)}.hidden{display:none!important}.meeting{height:720px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#111;margin-top:20px}.meeting iframe{width:100%;height:100%;border:0}.roombar{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap}.roombar strong{font-size:18px}.badge{display:inline-flex;padding:5px 8px;border-radius:99px;background:#e1eee6;color:var(--ok);font-size:10px;font-weight:800}.warning{padding:12px 14px;border:1px solid #ead7a8;background:#fff8df;border-radius:9px;color:#6f5721;font-size:12px;line-height:1.6;margin-top:14px}.footer{padding:35px 0 60px;color:var(--muted);font-size:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.field.full{grid-column:auto}.meeting{height:620px}.top{align-items:flex-start}.hero{padding-top:24px}}
+</style>
+</head>
+<body>
+<header class="top wrap"><div class="brand"><span>FQ</span>MUN <small style="font-size:10px;color:#8d857c">CONFERENCE</small></div><a class="back" href="index.html">← FQMUN Home</a></header>
+<main class="wrap">
+<section class="hero"><div class="eyebrow">26–28 AUGUST 2026 · ONLINE CONFERENCE</div><h1>Enter the <em>floor.</em></h1><p>Delegates enter with their FQMUN Registration ID and final allocation details. Chairs, hosts and authorized staff can use the staff entrance. The actual committee call is embedded here so participants do not need a separate meeting page.</p></section>
+<section id="accessPanel" class="panel">
+<div class="tabs"><button class="tab active" id="delegateTab">Delegate entrance</button><button class="tab" id="staffTab">Chair / Host / Staff</button></div>
+<div id="delegateMode">
+<div class="grid">
+<div class="field"><label for="delegateId">FQMUN Registration ID</label><input id="delegateId" placeholder="e.g. FQMUN-025" autocomplete="off"></div>
+<div class="field"><label for="committee">Committee</label><select id="committee"><option value="">Select committee</option><option>UNSC — United Nations Security Council</option><option>UNHRC — United Nations Human Rights Council</option><option>PNA — Pakistan National Assembly</option></select></div>
+<div class="field" id="countryField"><label for="country">Allocated country</label><input id="country" placeholder="e.g. United Kingdom"></div>
+<div class="field hidden" id="personalityField"><label for="personality">Allocated personality</label><input id="personality" placeholder="For PNA delegates"></div>
+<div class="field full"><button class="btn" id="verifyBtn">Verify & enter conference</button><div id="delegateMsg" class="msg"></div></div>
+</div>
+<div class="warning">Only use your <b>final allocated</b> committee and country/personality. A registration that is not verified and assigned will not be admitted through the delegate entrance.</div>
+</div>
+<div id="staffMode" class="hidden">
+<div class="grid">
+<div class="field"><label for="staffName">Name</label><input id="staffName" placeholder="Chair / Host / Admin name"></div>
+<div class="field"><label for="staffCommittee">Committee</label><select id="staffCommittee"><option value="">Select committee</option><option>UNSC — United Nations Security Council</option><option>UNHRC — United Nations Human Rights Council</option><option>PNA — Pakistan National Assembly</option></select></div>
+<div class="field full"><button class="btn" id="staffEnter">Enter staff room</button><div id="staffMsg" class="msg"></div></div>
+</div>
+<div class="warning"><b>Staff entrance:</b> this path is intentionally separate because chairs/hosts may not have delegate registrations. Only authorized FQMUN staff should use it. The committee host can control the room and remove unwanted participants.</div>
+</div>
+</section>
+<section id="conferencePanel" class="panel hidden">
+<div class="roombar"><div><span class="badge">ACCESS VERIFIED</span><h2 id="roomTitle" style="margin:9px 0 4px">Committee Conference</h2><div id="participantInfo" style="color:var(--muted);font-size:12px"></div></div><button class="back" id="leaveBtn" type="button">Leave conference</button></div>
+<div class="warning">Keep your microphone muted unless you have the floor. Do not share this conference page or room name with unauthorized people. Jitsi provides the embedded meeting interface.</div>
+<div class="meeting" id="meeting"></div>
+</section>
+</main>
+<footer class="footer wrap">FQMUN 2026 · Online Model United Nations</footer>
+<script src="https://meet.jit.si/external_api.js"></script>
+<script>
+const API='https://script.google.com/macros/s/AKfycbwnUSLioKlBZrLepPmkrQh9Qgnwb1LfzgyQGNR-MutuyUgeo8jn8plXd_3B81sgRULN/exec';
+let jitsi=null;const $=id=>document.getElementById(id);
+const committeeRooms={'UNSC — United Nations Security Council':'FQMUN-2026-UNSC-COMMITTEE','UNHRC — United Nations Human Rights Council':'FQMUN-2026-UNHRC-COMMITTEE','PNA — Pakistan National Assembly':'FQMUN-2026-PNA-COMMITTEE'};
+function msg(el,text,cls='info'){el.className='msg '+cls;el.textContent=text}
+function updateCommitteeFields(){const pna=$('committee').value==='PNA — Pakistan National Assembly';$('personalityField').classList.toggle('hidden',!pna);$('countryField').classList.toggle('hidden',pna)}
+$('committee').addEventListener('change',updateCommitteeFields);updateCommitteeFields();
+$('delegateTab').onclick=()=>{$('delegateTab').classList.add('active');$('staffTab').classList.remove('active');$('delegateMode').classList.remove('hidden');$('staffMode').classList.add('hidden')};
+$('staffTab').onclick=()=>{$('staffTab').classList.add('active');$('delegateTab').classList.remove('active');$('staffMode').classList.remove('hidden');$('delegateMode').classList.add('hidden')};
+async function apiLookup(registrationId){const r=await fetch(API,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({action:'registrationLookup',registrationId})});const text=(await r.text()).trim();if(!text)throw new Error('Registration server returned an empty response.');if(/^</.test(text))throw new Error('Registration server returned an HTML page.');let data;try{data=JSON.parse(text)}catch(e){throw new Error('Registration server returned invalid JSON.')}if(!data.ok)throw new Error(data.error||'Registration not found.');return data.registration}
+function normalize(v){return String(v||'').trim().toLowerCase()}function committeeMatches(input,actual){return normalize(input)===normalize(actual)}function valueMatches(input,actual){return normalize(input)===normalize(actual)}
+function enterRoom(committee,displayName,kind){const room=committeeRooms[committee];if(!room)throw new Error('This committee does not have a conference room configured.');$('accessPanel').classList.add('hidden');$('conferencePanel').classList.remove('hidden');$('roomTitle').textContent=committee.split(' — ')[0]+' Conference Room';$('participantInfo').textContent=displayName+' · '+kind;const meeting=$('meeting');meeting.innerHTML='';if(typeof JitsiMeetExternalAPI!=='function')throw new Error('Jitsi failed to load. Refresh and try again.');jitsi=new JitsiMeetExternalAPI('meet.jit.si',{roomName:room,parentNode:meeting,width:'100%',height:'100%',userInfo:{displayName},configOverwrite:{prejoinConfig:{enabled:true},startWithAudioMuted:true,startWithVideoMuted:true},interfaceConfigOverwrite:{DISABLE_JOIN_LEAVE_NOTIFICATIONS:true}})}
+$('verifyBtn').onclick=async()=>{const b=$('verifyBtn');const id=$('delegateId').value.trim();const committee=$('committee').value;const country=$('country').value.trim();const personality=$('personality').value.trim();if(!id||!committee){msg($('delegateMsg'),'Enter your Registration ID and committee.','error');return}if(committee.startsWith('PNA')?!personality:!country){msg($('delegateMsg'),'Enter your final allocated '+(committee.startsWith('PNA')?'personality.':'country.'),'error');return}b.disabled=true;msg($('delegateMsg'),'Checking your final allocation…');try{const r=await apiLookup(id);if(normalize(r.status)!=='verified')throw new Error('Your registration is not Verified yet. Please contact FQMUN administration.');if(normalize(r.allocationStatus)!=='assigned')throw new Error('Your final allocation is not assigned yet. Please contact FQMUN administration.');if(!committeeMatches(committee,r.allocatedCommittee))throw new Error('The committee does not match your final FQMUN allocation.');if(committee.startsWith('PNA')){if(!valueMatches(personality,r.allocatedPersonality))throw new Error('The personality does not match your final FQMUN allocation.')}else if(!valueMatches(country,r.allocatedCountry))throw new Error('The country does not match your final FQMUN allocation.');const name=r.fullName||'FQMUN Delegate';enterRoom(r.allocatedCommittee,name,'Verified Delegate · '+id);msg($('delegateMsg'),'Access verified. Opening the committee room…','success')}catch(e){msg($('delegateMsg'),e.message||'Access could not be verified.','error')}finally{b.disabled=false}};
+$('staffEnter').onclick=()=>{const b=$('staffEnter');const name=$('staffName').value.trim();const committee=$('staffCommittee').value;if(!name||!committee){msg($('staffMsg'),'Enter your name and committee.','error');return}try{enterRoom(committee,name,'Chair / Host / Staff')}catch(e){msg($('staffMsg'),e.message,'error')}};
+$('leaveBtn').onclick=()=>{try{jitsi?.dispose()}catch(e){}jitsi=null;$('meeting').innerHTML='';$('conferencePanel').classList.add('hidden');$('accessPanel').classList.remove('hidden')};
+</script>
+</body>
+</html>
