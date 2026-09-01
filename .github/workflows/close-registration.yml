@@ -1,0 +1,31 @@
+name: Close FQMUN Registration
+on:
+  push:
+    branches: [main]
+permissions:
+  contents: write
+jobs:
+  close-registration:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Disable public registration without changing other features
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          s=p.read_text(encoding='utf-8')
+          marker='<!-- FQMUN REGISTRATION CLOSED -->'
+          if marker not in s:
+              inject='''<style>\n#register{display:none!important}.nav-cta[href="#register"]{display:none!important}\n</style>\n<script>\n(()=>{\n  const msg=()=>alert('FQMUN registration is now closed. The conference has finished and new registrations are no longer accepted.');\n  document.querySelectorAll('a[href="#register"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();msg();});});\n  const f=document.getElementById('registrationForm');\n  if(f){f.addEventListener('submit',e=>{e.preventDefault();msg();});}\n})();\n</script>\n'''+marker
+              s=s.replace('</body>',inject+'</body>')
+              p.write_text(s,encoding='utf-8')
+          PY
+      - name: Commit closure
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add index.html
+          git diff --cached --quiet || git commit -m "Close FQMUN registration after conference"
+          git push
